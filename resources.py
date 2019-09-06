@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from models import UserModel, RevokedTokenModel
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
-
+import producer
 parser = reqparse.RequestParser()
 parser.add_argument('username', help = 'This field cannot be blank', required = True)
 parser.add_argument('password', help = 'This field cannot be blank', required = True)
@@ -97,4 +97,15 @@ class SecretResource(Resource):
     def get(self):
         return {
             'answer': 42
+        }
+class SendEmail(Resource):
+    @jwt_required
+    def post(self):
+        custom_parser = reqparse.RequestParser()
+        custom_parser.add_argument('message', help = 'This field cannot be blank', required = True)
+        custom_parser.add_argument('subject', help = 'This field cannot be blank', required = True)
+        data = custom_parser.parse_args()
+        producer.queue_message(data["message"],data["subject"])
+        return {
+            'message': 'Message Sent'
         }

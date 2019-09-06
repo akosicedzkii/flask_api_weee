@@ -3,4 +3,6 @@ flask-restful
 flask-jwt-extended
 passlib
 flask-sqlalchemy
-mysqlclient
+mysql-connector
+stomp.py
+python-dotenv

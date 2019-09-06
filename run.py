@@ -6,7 +6,7 @@ from flask_jwt_extended import JWTManager
 app = Flask(__name__)
 api = Api(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootpassword@172.19.0.2/flask_api'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootpassword@172.22.0.2/flask_api'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'some-secret-string'
 
@@ -36,3 +36,4 @@ api.add_resource(resources.UserLogoutRefresh, '/logout/refresh')
 api.add_resource(resources.TokenRefresh, '/token/refresh')
 api.add_resource(resources.AllUsers, '/users')
 api.add_resource(resources.SecretResource, '/secret')
+api.add_resource(resources.SendEmail,'/send_email')

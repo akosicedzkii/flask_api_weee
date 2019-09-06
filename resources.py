@@ -25,6 +25,7 @@ class UserRegistration(Resource):
             refresh_token = create_refresh_token(identity = data['username'])
             return {
                 'message': 'User {} was created'.format(data['username']),
+                'date_created' : str(new_user.date_created),
                 'access_token': access_token,
                 'refresh_token': refresh_token
                 }

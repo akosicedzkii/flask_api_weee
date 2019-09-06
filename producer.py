@@ -19,5 +19,5 @@ def queue_message(message,subject):
     queue = { "message" : message , "subject" : subject }
     conn.send(body=json.dumps(queue), destination='/queue/emailer')
 
-    time.sleep(2)
+    time.sleep(0.01)
     conn.disconnect()

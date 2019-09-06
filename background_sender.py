@@ -22,7 +22,7 @@ while True:
     
     conn.subscribe('emailer')
     
-    time.sleep(1) # secs
+    time.sleep(.01) # secs
     
     conn.disconnect()
 # conn = stomp.Connection10()

@@ -5,7 +5,7 @@ import producer
 parser = reqparse.RequestParser()
 parser.add_argument('username', help = 'This field cannot be blank', required = True)
 parser.add_argument('password', help = 'This field cannot be blank', required = True)
-
+import asyncio
 
 class UserRegistration(Resource):
     def post(self):

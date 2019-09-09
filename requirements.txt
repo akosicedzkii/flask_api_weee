@@ -9,3 +9,4 @@ python-dotenv
 flask_sqlalchemy
 mysqlclient
 flask_restplus
+flask_swagger_ui

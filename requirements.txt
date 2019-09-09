@@ -8,3 +8,4 @@ stomp.py
 python-dotenv
 flask_sqlalchemy
 mysqlclient
+flask_restplus

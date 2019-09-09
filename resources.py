@@ -36,7 +36,7 @@ class UserRegistration(Resource):
         except:
             return {'message': 'Something went wrong'}, 500
 
-
+@name_space.route("/login")
 class UserLogin(Resource):
     @api.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
 			 params={ 'username': 'Username of the user' , 'password' : 'Password of the User' })
@@ -58,7 +58,8 @@ class UserLogin(Resource):
         else:
             return {'message': 'Wrong credentials'}
 
-
+@api.doc(security='apikey')
+@name_space.route("/logout/access")
 class UserLogoutAccess(Resource):
     @jwt_required
     def post(self):
@@ -70,7 +71,8 @@ class UserLogoutAccess(Resource):
         except:
             return {'message': 'Something went wrong'}, 500
 
-
+@api.doc(security='apikey')
+@name_space.route("/logout/refresh")
 class UserLogoutRefresh(Resource):
     @jwt_refresh_token_required
     def post(self):
@@ -82,7 +84,8 @@ class UserLogoutRefresh(Resource):
         except:
             return {'message': 'Something went wrong'}, 500
 
-
+@api.doc(security='apikey')
+@name_space.route("/token/refresh")
 class TokenRefresh(Resource):
     @jwt_refresh_token_required
     def post(self):
@@ -97,8 +100,7 @@ class AllUsers(Resource):
     
     def delete(self):
         return UserModel.delete_all()
-
-
+@api.doc(security='apikey')
 class SecretResource(Resource):
     @jwt_required
     def get(self):

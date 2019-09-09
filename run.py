@@ -4,13 +4,20 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from flask_restplus import Api, Resource
 
-
+authorizations = {
+    'apikey': {
+        'type': 'apiKey',
+        'in': 'header',
+        'name': 'Authorization',
+        'description': "Type in the *'Value'* input box below: **'Bearer &lt;JWT&gt;'**, where JWT is the token"
+    }
+}
 app = Flask(__name__)
-api = Api(app = app)
+api = Api(app = app,authorizations=authorizations,description='DevOps APIs',title = "DevOps APIs" )
 
-name_space = api.namespace('main', description='Main APIs')
+name_space = api.namespace('auth', description='Auth APIs')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootpassword@172.19.0.2/flask_api'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootpassword@172.22.0.2/flask_api'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'some-secret-string'
 
@@ -34,10 +41,10 @@ def check_if_token_in_blacklist(decrypted_token):
 import views, models, resources
 
 api.add_resource(resources.UserRegistration, '/registration')
-api.add_resource(resources.UserLogin, '/login')
-api.add_resource(resources.UserLogoutAccess, '/logout/access')
-api.add_resource(resources.UserLogoutRefresh, '/logout/refresh')
-api.add_resource(resources.TokenRefresh, '/token/refresh')
+api.add_resource(resources.UserLogin)
+api.add_resource(resources.UserLogoutAccess)
+api.add_resource(resources.UserLogoutRefresh)
+api.add_resource(resources.TokenRefresh)
 api.add_resource(resources.AllUsers, '/users')
 api.add_resource(resources.SecretResource, '/secret')
 api.add_resource(resources.SendEmail,'/send_email')

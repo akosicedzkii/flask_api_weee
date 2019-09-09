@@ -6,3 +6,5 @@ flask-sqlalchemy
 mysql-connector
 stomp.py
 python-dotenv
+flask_sqlalchemy
+mysqlclient

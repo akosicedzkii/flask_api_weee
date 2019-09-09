@@ -2,11 +2,15 @@ from flask import Flask
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
+from flask_restplus import Api, Resource
+
 
 app = Flask(__name__)
-api = Api(app)
+api = Api(app = app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootpassword@172.22.0.2/flask_api'
+name_space = api.namespace('main', description='Main APIs')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootpassword@172.19.0.2/flask_api'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'some-secret-string'
 
@@ -37,3 +41,5 @@ api.add_resource(resources.TokenRefresh, '/token/refresh')
 api.add_resource(resources.AllUsers, '/users')
 api.add_resource(resources.SecretResource, '/secret')
 api.add_resource(resources.SendEmail,'/send_email')
+
+

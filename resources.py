@@ -6,8 +6,12 @@ parser = reqparse.RequestParser()
 parser.add_argument('username', help = 'This field cannot be blank', required = True)
 parser.add_argument('password', help = 'This field cannot be blank', required = True)
 import asyncio
+from run import api,name_space
+from flask_restplus import Api, Resource
 
 class UserRegistration(Resource):
+    @api.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
+			 params={ 'username': 'Username of the user' , 'password' : 'Password of the User' })
     def post(self):
         data = parser.parse_args()
         
@@ -34,6 +38,8 @@ class UserRegistration(Resource):
 
 
 class UserLogin(Resource):
+    @api.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
+			 params={ 'username': 'Username of the user' , 'password' : 'Password of the User' })
     def post(self):
         data = parser.parse_args()
         current_user = UserModel.find_by_username(data['username'])

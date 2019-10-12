@@ -107,8 +107,12 @@ class SecretResource(Resource):
         return {
             'answer': 42
         }
+        
+@api.doc(security='apikey')        
 class SendEmail(Resource):
     @jwt_required
+    @api.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
+			 params={ 'subject': 'Subject of the email' , 'message' : 'Email message' })
     def post(self):
         custom_parser = reqparse.RequestParser()
         custom_parser.add_argument('message', help = 'This field cannot be blank', required = True)

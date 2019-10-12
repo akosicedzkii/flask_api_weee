@@ -29,7 +29,7 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 )
 
 app.register_blueprint(swaggerui_blueprint,url_prefix=SWAGGER_URL)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootpassword@172.22.0.2/flask_api'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootpassword@172.19.0.2/flask_api'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'some-secret-string'
 

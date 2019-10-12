@@ -1,0 +1,29 @@
+version: '3.2'
+services:
+  web:
+    build: app
+    volumes:
+      - "./app:/app"
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - mysql
+      - mq
+  mysql:
+    image: mysql:5.6.40
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=flask_api
+  mq:
+    build: activemq
+    volumes:
+      - /data/activemq:/data
+      - /var/log/activemq:/var/log/activemq
+    networks:
+      - backend
+networks:
+  frontend:
+  backend:

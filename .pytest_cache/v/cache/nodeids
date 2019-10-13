@@ -1,0 +1,3 @@
+[
+  "app/run_test.py::TestRun::test_send_email"
+]

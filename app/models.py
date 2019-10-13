@@ -9,6 +9,9 @@ class UserModel(db.Model):
     username = db.Column(db.String(120), unique = True, nullable = False)
     password = db.Column(db.String(120), nullable = False)
     date_created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    created_by = db.Column(db.Integer, nullable= True)
+    date_modified = db.Column(db.DateTime, nullable = True)
+    modified_by = db.Column(db.Integer, nullable= True)
     status = db.Column(db.Integer,default=1,nullable = False)
     def save_to_db(self):
         db.session.add(self)

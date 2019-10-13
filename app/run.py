@@ -54,7 +54,7 @@ import views, models, resources
 
 
 api.add_resource(resources.UserRegistration, '/registration')
-api.add_resource(resources.UserLogin)
+api.add_resource(resources.UserLogin,'/login')
 api.add_resource(resources.UserLogoutAccess)
 api.add_resource(resources.UserLogoutRefresh)
 api.add_resource(resources.TokenRefresh)
@@ -62,4 +62,5 @@ api.add_resource(resources.AllUsers, '/users')
 api.add_resource(resources.SecretResource, '/secret')
 api.add_resource(resources.SendEmail,'/send_email')
 
-
+if __name__ == '__main__':
+   app.run(debug=True,host="0.0.0.0")

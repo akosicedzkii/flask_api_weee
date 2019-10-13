@@ -12,7 +12,7 @@ class SampleListener(object):
     
     
 while True: 
-    conn = stomp.Connection10()
+    conn = stomp.Connection10([('mq', 61613)])
     
     conn.set_listener('SampleListener', SampleListener())
     
@@ -22,7 +22,7 @@ while True:
     
     conn.subscribe('emailer')
     
-    time.sleep(.1) # secs
+    time.sleep(.5) # secs
     
     conn.disconnect()
 # conn = stomp.Connection10()

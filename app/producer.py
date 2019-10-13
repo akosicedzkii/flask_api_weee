@@ -10,7 +10,7 @@ class MyListener(stomp.ConnectionListener):
         print('received a message "%s"' % message)
 
 def queue_message(message,subject):
-    conn = stomp.Connection()
+    conn = stomp.Connection([('mq', 61613)])
     conn.set_listener('', MyListener())
     conn.start()
     conn.connect('user', 'user', wait=True)

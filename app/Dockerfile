@@ -8,18 +8,20 @@ RUN apt-get update \
   && pip3 install --upgrade pip
 
 #COPY . /app 
-
+ADD . /app
 WORKDIR /app
 
 RUN pip3 install virtualenv
 
 RUN virtualenv env
+RUN ls -l
 
 RUN /bin/bash -c "source env/bin/activate"
 
 RUN pip3 install -r requirements.txt
-RUN export LC_ALL=C.UTF-8
-RUN export LANG=C.UTF-8
-RUN FLASK_APP=run.py FLASK_DEBUG=1 flask run
+RUN export LC_ALL=en_US.UTF-8
+RUN export LANG=en_US.UTF-8
+#RUN FLASK_APP=run.py FLASK_DEBUG=1 flask run
 #RUN ls -l
-#CMD ["python","run.py"]
+CMD ["python","run.py"]
+#CMD []

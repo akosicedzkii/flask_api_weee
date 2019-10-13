@@ -8,7 +8,7 @@ class SampleListener(object):
   def on_message(self, headers, msg):
     print(msg)
     message = json.loads(msg)
-    send_email.send_message(message["message"],message["subject"])
+    send_email.send_message(message["message"],message["subject"],message["to"])
     
     
 while True: 

@@ -11,17 +11,17 @@ RUN apt-get update \
 ADD . /app
 WORKDIR /app
 
-RUN pip3 install virtualenv
+#RUN pip3 install virtualenv
 
-RUN virtualenv env
-RUN ls -l
+#RUN virtualenv env
+#RUN ls -l
 
-RUN /bin/bash -c "source env/bin/activate"
+#RUN /bin/bash -c "source env/bin/activate"
 
 RUN pip3 install -r requirements.txt
-RUN export LC_ALL=en_US.UTF-8
-RUN export LANG=en_US.UTF-8
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 #RUN FLASK_APP=run.py FLASK_DEBUG=1 flask run
 #RUN ls -l
-CMD ["python","run.py"]
+CMD ["bash","flask_start.sh"]
 #CMD []

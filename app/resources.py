@@ -6,9 +6,9 @@ parser = reqparse.RequestParser()
 parser.add_argument('username', help = 'This field cannot be blank', required = True)
 parser.add_argument('password', help = 'This field cannot be blank', required = True)
 import asyncio
-from run import api,name_space
 from flask_restplus import Api, Resource
 
+from run import api,name_space
 class UserRegistration(Resource):
     @api.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
 			 params={ 'username': 'Username of the user' , 'password' : 'Password of the User' })
@@ -112,13 +112,14 @@ class SecretResource(Resource):
 class SendEmail(Resource):
     @jwt_required
     @api.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
-			 params={ 'subject': 'Subject of the email' , 'message' : 'Email message' })
+			 params={ 'subject': 'Subject of the email' , 'message' : 'Email message', 'to': 'Email Address' })
     def post(self):
         custom_parser = reqparse.RequestParser()
         custom_parser.add_argument('message', help = 'This field cannot be blank', required = True)
         custom_parser.add_argument('subject', help = 'This field cannot be blank', required = True)
+        custom_parser.add_argument('to', help = 'This field cannot be blank', required = True)
         data = custom_parser.parse_args()
-        producer.queue_message(data["message"],data["subject"])
+        producer.queue_message(data["message"],data["subject"],data["to"])
         return {
             'message': 'Message Sent'
         }

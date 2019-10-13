@@ -10,11 +10,11 @@ password = os.getenv("EMAIL_PASSWORD")
 
 
 
-def send_message(messages,subject):
+def send_message(messages,subject,to):
     message = MIMEMultipart("alternative")
     message["Subject"] = subject
     message["From"] = sender_email
-    message["To"] = receiver_email
+    message["To"] = to
     # Create the plain-text and HTML version of your message
     text = """\
     Hi,
@@ -46,5 +46,5 @@ def send_message(messages,subject):
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         server.login(sender_email, password)
         server.sendmail(
-            sender_email, receiver_email, message.as_string()
+            sender_email, to.split(","), message.as_string()
         )
